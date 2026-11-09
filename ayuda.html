@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ayuda · Menú mediterráneo del mes</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="cabecera">
+    <div class="contenedor">
+      <h1><span aria-hidden="true">🫒</span> Ayuda</h1>
+      <p class="lema"><a href="index.html">← Volver al menú</a></p>
+    </div>
+  </header>
+
+  <main class="contenedor ayuda-pagina">
+    <section class="panel" aria-labelledby="t-abrir">
+      <h2 id="t-abrir">Cómo abrirla</h2>
+      <p>Abre <code>index.html</code> con doble clic o arrástralo a cualquier navegador moderno (Chrome, Firefox, Edge o Safari). No hace falta instalar nada ni usar un servidor: todo es HTML, CSS y JavaScript que el navegador carga directamente.</p>
+      <p>Los datos (menú, dietas, platos bloqueados y productos tachados) se guardan en el <code>localStorage</code> de ese navegador. El botón «Reiniciar y borrar datos» los elimina.</p>
+    </section>
+
+    <section class="panel" aria-labelledby="t-archivos">
+      <h2 id="t-archivos">Archivos</h2>
+      <div class="tabla-scroll">
+        <table class="tabla-frecuencias">
+          <thead><tr><th scope="col">Archivo</th><th scope="col">Contenido</th></tr></thead>
+          <tbody>
+            <tr><th scope="row"><code>index.html</code></th><td>Estructura de la aplicación</td></tr>
+            <tr><th scope="row"><code>styles.css</code></th><td>Estilos, versión móvil e impresión</td></tr>
+            <tr><th scope="row"><code>recetas.js</code></th><td>Datos: base de ingredientes (categoría y nutrientes) y recetas</td></tr>
+            <tr><th scope="row"><code>app.js</code></th><td>Lógica: generación del menú, calendario, nutrición y lista de la compra</td></tr>
+            <tr><th scope="row"><code>ayuda.html</code></th><td>Esta página</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel" aria-labelledby="t-receta">
+      <h2 id="t-receta">Cómo añadir una receta</h2>
+      <ol>
+        <li>
+          <p>Abre <code>recetas.js</code> con un editor de texto y copia una receta del mismo tipo:</p>
+          <pre><code>{ id: "c65", nombre: "Mi receta", tipo: "comida", tiempo: 20,
+  vegetariana: true, sinGluten: true, grupo: "legumbres",
+  ingredientes: [["Garbanzos cocidos (bote)", 150], ["Tomate", 100],
+                 ["Aceite de oliva virgen extra", 10]] },</code></pre>
+        </li>
+        <li>
+          <p>Rellena los campos:</p>
+          <ul>
+            <li><code>id</code>: identificador único. Usa <code>c…</code> para comidas y <code>n…</code> para cenas.</li>
+            <li><code>tipo</code>: <code>"comida"</code> o <code>"cena"</code>.</li>
+            <li><code>tiempo</code>: minutos de preparación (30 como máximo).</li>
+            <li><code>grupo</code>: tipo de plato, para que no se repita en días seguidos. Puede ser <code>legumbres</code>, <code>pasta</code>, <code>arroz</code>, <code>cereales</code>, <code>verduras</code>, <code>cremas</code>, <code>ensalada</code>, <code>huevos</code>, <code>pescado</code>, <code>carne</code> o <code>pan</code>.</li>
+            <li><code>ingredientes</code>: lista de pares <code>["Nombre", cantidad por persona]</code>. El nombre tiene que existir en <code>INGREDIENTES</code>. La unidad y la categoría se toman de ahí, y las calorías y los nutrientes se calculan automáticamente.</li>
+          </ul>
+        </li>
+        <li>
+          <p>Si un ingrediente no existe, añádelo a <code>INGREDIENTES</code> con sus valores por cada 100 g o 100 ml:</p>
+          <pre><code>"Calabacín": I(FV, "g", 17, 1.2, 3.1, 0.3, 1),  // kcal, proteínas, hidratos, grasas, fibra</code></pre>
+          <p>Si contiene gluten, añade <code>{ gluten: true }</code>. Si es carne o pescado, añade <code>{ animal: "pescado" }</code>, <code>"blanca"</code> o <code>"roja"</code>.</p>
+        </li>
+        <li><p>Marca <code>vegetariana</code> y <code>sinGluten</code> según los ingredientes. Si hay alguna incoherencia, la aplicación avisa en la consola del navegador (tecla F12).</p></li>
+        <li><p>Guarda el archivo y recarga <code>index.html</code>.</p></li>
+      </ol>
+    </section>
+
+    <section class="panel" aria-labelledby="t-reglas">
+      <h2 id="t-reglas">Reglas del generador</h2>
+      <ul>
+        <li>Solo se usan recetas que cumplen las dietas marcadas. Sin ninguna dieta marcada, se usan todas.</li>
+        <li>El mismo plato no se repite en 7 días seguidos.</li>
+        <li>El mismo tipo de plato no aparece en días contiguos ni en la comida y la cena del mismo día.</li>
+        <li>Como máximo hay 4 platos de carne a la semana, de los cuales 2 como mucho de carne roja.</li>
+        <li>Se prioriza llegar a 3 o más legumbres y unos 3 o 4 pescados por semana, más huevos y carne blanca con moderación.</li>
+        <li>Si no hay suficientes recetas, las reglas se relajan en este orden: primero la repetición, luego el equilibrio de tipos de plato y por último el límite de carne. Cuando ocurre, la aplicación lo avisa.</li>
+      </ul>
+      <p class="ayuda">Los valores nutricionales son orientativos.</p>
+    </section>
+  </main>
+</body>
+</html>
