@@ -1,0 +1,388 @@
+/* =====================================================================
+   styles.css — Menú mediterráneo del mes
+   Paleta cálida y suave inspirada en el Mediterráneo (aceite, terracota,
+   arena). Tipografía del sistema.
+   ===================================================================== */
+:root {
+  --fondo: #faf6f0;
+  --superficie: #ffffff;
+  --superficie-2: #f3ece2;
+  --borde: #e3d8c8;
+  --texto: #2e2a25;
+  --texto-suave: #5f564b;
+  --primario: #a4472a;          /* terracota (contraste 5,6:1 sobre blanco) */
+  --primario-hover: #8a3a21;
+  --oliva: #4f6328;
+  --oliva-suave: #e8eed9;
+  --mar: #24597a;
+  --mar-suave: #e1edf4;
+  --trigo: #7a5a12;
+  --trigo-suave: #f6edd3;
+  --aviso: #8a5a00;
+  --aviso-suave: #fff3d6;
+  --error: #a3261b;
+  --error-suave: #fde6e3;
+  --ok-suave: #e5f1e3;
+  --foco: #1f6fb2;
+  --sombra: 0 1px 2px rgba(60, 40, 20, .06), 0 4px 14px rgba(60, 40, 20, .06);
+  --radio: 14px;
+  --fuente: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fondo: #1d1a17;
+    --superficie: #27231f;
+    --superficie-2: #312c26;
+    --borde: #463f36;
+    --texto: #f1ebe3;
+    --texto-suave: #c8bdb0;
+    --primario: #e08a68;
+    --primario-hover: #eba184;
+    --oliva: #b8cc8a;
+    --oliva-suave: #33391f;
+    --mar: #9cc8e4;
+    --mar-suave: #1e3240;
+    --trigo: #e2c374;
+    --trigo-suave: #3a3018;
+    --aviso: #f0c461;
+    --aviso-suave: #3a2f14;
+    --error: #ff9d92;
+    --error-suave: #3d1d1a;
+    --ok-suave: #22331f;
+    --foco: #8fc3ff;
+    --sombra: 0 1px 2px rgba(0, 0, 0, .3), 0 4px 14px rgba(0, 0, 0, .25);
+    color-scheme: dark;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--fuente);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--texto);
+  background: var(--fondo);
+}
+
+h1, h2, h3, h4 { line-height: 1.25; margin: 0 0 .5rem; }
+h2 { font-size: 1.35rem; }
+h3 { font-size: 1.1rem; }
+p { margin: 0 0 .75rem; }
+
+:focus-visible {
+  outline: 3px solid var(--foco);
+  outline-offset: 2px;
+}
+
+.visualmente-oculto {
+  position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+.saltar {
+  position: absolute; left: 1rem; top: -3rem; z-index: 10;
+  background: var(--primario); color: #fff; padding: .5rem 1rem; border-radius: 8px;
+}
+.saltar:focus { top: 1rem; }
+
+.contenedor { width: 100%; max-width: 1180px; margin: 0 auto; padding: 0 16px; }
+
+/* ---------- Cabecera ---------- */
+.cabecera {
+  background: linear-gradient(135deg, #f4e6d4 0%, #eef0dd 100%);
+  border-bottom: 1px solid var(--borde);
+  padding: 1.5rem 0 1.25rem;
+  margin-bottom: 1.25rem;
+}
+@media (prefers-color-scheme: dark) {
+  .cabecera { background: linear-gradient(135deg, #2f261d 0%, #262b1c 100%); }
+}
+.cabecera h1 { font-size: clamp(1.5rem, 4vw, 2.1rem); color: var(--texto); }
+.lema { color: var(--texto-suave); margin: 0; }
+
+/* ---------- Paneles ---------- */
+.panel {
+  background: var(--superficie);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  padding: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+.panel-cab {
+  display: flex; flex-wrap: wrap; gap: .5rem 1rem;
+  align-items: flex-end; justify-content: space-between;
+  margin-bottom: .75rem;
+}
+.panel-cab h2 { margin: 0; }
+.ayuda { color: var(--texto-suave); font-size: .9rem; }
+.leyenda { margin: 0; }
+
+/* ---------- Formulario ---------- */
+.opciones {
+  display: flex; flex-wrap: wrap; gap: 1rem 1.25rem; align-items: flex-end;
+}
+.campo { display: flex; flex-direction: column; gap: .3rem; min-width: 0; }
+.campo > label, .dietas legend { font-weight: 600; font-size: .9rem; }
+.campo-anio input { width: 6.5rem; }
+
+select, input[type="number"] {
+  font: inherit; color: var(--texto);
+  background: var(--superficie);
+  border: 1px solid #b9ab98; border-radius: 10px;
+  padding: .55rem .7rem; min-height: 44px;
+}
+select { padding-right: 2rem; }
+
+.dietas {
+  border: 1px solid var(--borde); border-radius: 12px;
+  padding: .4rem .9rem .6rem; margin: 0;
+  flex-direction: row; flex-wrap: wrap; gap: .25rem 1rem;
+}
+.dietas legend { padding: 0 .3rem; }
+.opcional { font-weight: 400; color: var(--texto-suave); }
+.casilla {
+  display: inline-flex; align-items: center; gap: .4rem;
+  min-height: 36px; cursor: pointer;
+}
+input[type="checkbox"] { width: 1.15rem; height: 1.15rem; accent-color: var(--oliva); margin: 0; }
+
+.acciones-form { display: flex; flex-wrap: wrap; gap: .75rem; margin-left: auto; }
+
+/* ---------- Botones ---------- */
+.btn {
+  font: inherit; font-weight: 600; cursor: pointer;
+  border-radius: 999px; padding: .6rem 1.15rem; min-height: 44px;
+  border: 1px solid transparent; transition: background-color .15s, border-color .15s, color .15s;
+}
+.btn-primario { background: var(--primario); color: #fff; }
+.btn-primario:hover { background: var(--primario-hover); }
+@media (prefers-color-scheme: dark) {
+  .btn-primario { color: #1d1a17; }
+}
+.btn-secundario { background: var(--superficie); color: var(--texto); border-color: #b9ab98; }
+.btn-secundario:hover { background: var(--superficie-2); }
+.btn-peligro { background: transparent; color: var(--error); border-color: currentColor; }
+.btn-peligro:hover { background: var(--error-suave); }
+.btn:disabled { opacity: .55; cursor: not-allowed; }
+.btn-candado { background: var(--superficie); color: var(--texto); border-color: #b9ab98; }
+.btn-candado.activo { background: var(--trigo-suave); border-color: var(--trigo); color: var(--texto); }
+.btn-icono {
+  font-size: 1.6rem; line-height: 1; width: 44px; height: 44px;
+  border-radius: 50%; border: 1px solid var(--borde); background: var(--superficie);
+  color: var(--texto); cursor: pointer;
+}
+.btn-icono:hover { background: var(--superficie-2); }
+
+/* ---------- Avisos ---------- */
+.avisos:empty { display: none; }
+.aviso {
+  display: flex; gap: 1rem; align-items: flex-start; justify-content: space-between;
+  border-radius: 12px; padding: .8rem 1rem; margin-bottom: 1.25rem;
+  border: 1px solid var(--borde);
+}
+.aviso p { margin: 0; }
+.aviso-ok { background: var(--ok-suave); border-color: var(--oliva); }
+.aviso-aviso { background: var(--aviso-suave); border-color: var(--aviso); }
+.aviso-error { background: var(--error-suave); border-color: var(--error); }
+.aviso-cerrar {
+  background: none; border: 0; font-size: 1.4rem; line-height: 1; cursor: pointer;
+  color: inherit; min-width: 32px; min-height: 32px; border-radius: 6px;
+}
+
+/* ---------- Calendario ---------- */
+.vacio {
+  background: var(--superficie-2); border-radius: 12px; padding: 1rem; text-align: center;
+}
+.cal-semana, .cal-rejilla {
+  list-style: none; margin: 0; padding: 0;
+  display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px;
+}
+.cal-semana li {
+  text-align: center; font-weight: 700; font-size: .8rem; text-transform: uppercase;
+  letter-spacing: .04em; color: var(--texto-suave); padding: .25rem 0;
+}
+.cal-celda { min-width: 0; }
+.dia {
+  width: 100%; height: 100%; min-height: 128px;
+  display: flex; flex-direction: column; gap: 4px; align-items: stretch;
+  text-align: left; font: inherit; color: var(--texto);
+  background: var(--superficie); border: 1px solid var(--borde); border-radius: 10px;
+  padding: 6px 7px; cursor: pointer;
+  transition: border-color .15s, box-shadow .15s, transform .15s;
+}
+.dia:hover { border-color: var(--primario); box-shadow: var(--sombra); }
+.dia-finde { background: var(--superficie-2); }
+.dia-hoy { border: 2px solid var(--oliva); }
+.dia-cab { display: flex; align-items: baseline; gap: .4rem; }
+.dia-num { font-weight: 800; font-size: 1.05rem; }
+.dia-nombre { display: none; color: var(--texto-suave); font-weight: 600; }
+.dia-hoy-txt {
+  margin-left: auto; font-size: .7rem; font-weight: 700; background: var(--oliva-suave);
+  color: var(--oliva); padding: 0 .4rem; border-radius: 999px;
+}
+.mini {
+  display: flex; gap: 4px; align-items: flex-start;
+  font-size: .78rem; line-height: 1.25;
+  padding: 3px 5px; border-radius: 6px;
+}
+.mini-comida { background: var(--trigo-suave); }
+.mini-cena { background: var(--mar-suave); }
+.mini-nombre {
+  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+  overflow: hidden; flex: 1; min-width: 0; overflow-wrap: anywhere;
+}
+.mini-icono, .mini-marca { flex: none; }
+.dia-kcal, .dia-sin { margin-top: auto; font-size: .75rem; color: var(--texto-suave); font-weight: 600; }
+
+/* ---------- Diálogos ---------- */
+.dialogo {
+  width: min(760px, calc(100vw - 32px)); max-height: calc(100vh - 32px);
+  border: 1px solid var(--borde); border-radius: var(--radio);
+  padding: 1.25rem; color: var(--texto); background: var(--superficie);
+  box-shadow: 0 20px 60px rgba(30, 20, 10, .3);
+}
+.dialogo::backdrop { background: rgba(40, 30, 20, .45); }
+.dialogo-pequeno { width: min(520px, calc(100vw - 32px)); }
+.dialogo-cab {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  position: sticky; top: -1.25rem; background: var(--superficie);
+  padding: .25rem 0 .75rem; margin-top: -.25rem; z-index: 1;
+}
+.dialogo-cab h2 { margin: 0; }
+.dialogo-acciones { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 1rem; }
+.conflicto-lista { padding-left: 1.25rem; }
+
+.dia-cuerpo { display: grid; gap: 1rem; }
+.plato {
+  border: 1px solid var(--borde); border-radius: 12px; padding: 1rem;
+}
+.plato-comida { border-top: 5px solid #d7a64a; }
+.plato-cena { border-top: 5px solid #5f8fb0; }
+.plato-tipo { margin: 0 0 .2rem; font-size: .85rem; font-weight: 700; color: var(--texto-suave); text-transform: uppercase; letter-spacing: .04em; }
+.subtitulo { font-size: .95rem; margin: .75rem 0 .4rem; }
+
+.etiquetas { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: .4rem; }
+.etq {
+  font-size: .82rem; font-weight: 600; padding: .15rem .6rem; border-radius: 999px;
+  background: var(--superficie-2); border: 1px solid var(--borde);
+}
+.etq-veg { background: var(--oliva-suave); color: var(--oliva); border-color: transparent; }
+.etq-sg { background: var(--trigo-suave); color: var(--trigo); border-color: transparent; }
+.etq-prot { background: var(--mar-suave); color: var(--mar); border-color: transparent; }
+.etq-alerta { background: var(--aviso-suave); color: var(--aviso); border-color: var(--aviso); }
+
+.nutri {
+  display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .4rem; margin: 0;
+}
+.nutri-item {
+  background: var(--superficie-2); border-radius: 10px; padding: .45rem .5rem; text-align: center;
+}
+.nutri-item dt { font-size: .75rem; color: var(--texto-suave); font-weight: 600; }
+.nutri-item dd { margin: 0; font-weight: 700; font-size: .95rem; }
+.nutri-kcal { background: var(--primario); color: #fff; }
+.nutri-kcal dt { color: rgba(255, 255, 255, .9); }
+@media (prefers-color-scheme: dark) {
+  .nutri-kcal { color: #1d1a17; }
+  .nutri-kcal dt { color: rgba(29, 26, 23, .85); }
+}
+
+.ingredientes { margin-top: .75rem; }
+.ingredientes summary { cursor: pointer; font-weight: 600; padding: .25rem 0; }
+.ingredientes ul { list-style: none; padding: 0; margin: .25rem 0 0; columns: 2; column-gap: 1.5rem; }
+.ingredientes li {
+  display: flex; justify-content: space-between; gap: .5rem; break-inside: avoid;
+  padding: .2rem 0; border-bottom: 1px dashed var(--borde); font-size: .92rem;
+}
+.cant { color: var(--texto-suave); white-space: nowrap; }
+.plato-acciones { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1rem; }
+.dia-total { background: var(--oliva-suave); border-radius: 12px; padding: 1rem; }
+.dia-total .ayuda { margin: .5rem 0 0; }
+
+/* ---------- Resumen nutricional ---------- */
+#resumen-nutricional .nutri { max-width: 640px; margin-bottom: .75rem; }
+.reparto { font-size: .95rem; }
+.tabla-scroll { overflow-x: auto; }
+.tabla-frecuencias { border-collapse: collapse; min-width: 420px; width: 100%; max-width: 640px; }
+.tabla-frecuencias caption { text-align: left; font-weight: 700; padding-bottom: .4rem; }
+.tabla-frecuencias th, .tabla-frecuencias td {
+  text-align: left; padding: .4rem .6rem; border-bottom: 1px solid var(--borde);
+}
+.tabla-frecuencias thead th { font-size: .85rem; color: var(--texto-suave); }
+
+/* ---------- Lista de la compra ---------- */
+.compra-controles { display: flex; flex-wrap: wrap; gap: .75rem; align-items: flex-end; }
+.estado-compra:empty { display: none; }
+.lista-compra {
+  display: grid; gap: 1rem; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+.cat { background: var(--superficie-2); border-radius: 12px; padding: .9rem 1rem; }
+.cat h3 { font-size: 1rem; border-bottom: 2px solid var(--borde); padding-bottom: .35rem; }
+.productos { list-style: none; margin: 0; padding: 0; }
+.productos li { display: flex; align-items: center; gap: .55rem; padding: .3rem 0; }
+.productos label {
+  flex: 1; display: flex; justify-content: space-between; gap: .75rem; cursor: pointer; min-height: 32px; align-items: center;
+}
+.prod-cant { color: var(--texto-suave); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.productos li.tachado .prod-nombre, .productos li.tachado .prod-cant {
+  text-decoration: line-through; color: var(--texto-suave); opacity: .75;
+}
+.solo-impresion { display: none; }
+
+/* ---------- Pie ---------- */
+.pie { color: var(--texto-suave); font-size: .85rem; padding-bottom: 2rem; }
+
+/* ---------- Móvil: calendario como lista vertical ---------- */
+@media (max-width: 720px) {
+  .panel { padding: 1rem; }
+  .opciones { flex-direction: column; align-items: stretch; }
+  .campo-anio input { width: 100%; }
+  .acciones-form { margin-left: 0; flex-direction: column; }
+  .acciones-form .btn { width: 100%; }
+  .cal-semana { display: none; }
+  .cal-rejilla { grid-template-columns: 1fr; gap: 8px; }
+  .cal-hueco { display: none; }
+  .dia { min-height: 0; padding: 10px 12px; }
+  .dia-nombre { display: inline; }
+  .mini { font-size: .9rem; }
+  .mini-nombre { -webkit-line-clamp: 3; }
+  .nutri { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .ingredientes ul { columns: 1; }
+  .compra-controles { width: 100%; }
+  .compra-controles .campo { flex: 1 1 100%; }
+  .compra-controles .btn { flex: 1; }
+  .dialogo { padding: 1rem; }
+  .dialogo-cab { top: -1rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}
+
+/* ---------- Impresión: solo la lista de la compra ---------- */
+@media print {
+  @page { margin: 14mm; }
+  :root { color-scheme: light; }
+  body { background: #fff; color: #000; font-size: 11pt; }
+  .saltar, .cabecera, .panel-opciones, .avisos, #calendario, #resumen-nutricional,
+  .pie, .compra-controles, #compra-info, .estado-compra, dialog { display: none !important; }
+  .contenedor { max-width: none; padding: 0; }
+  .panel { border: 0; box-shadow: none; padding: 0; margin: 0; background: #fff; }
+  .panel-cab { margin-bottom: .25rem; }
+  #titulo-compra { font-size: 18pt; color: #000; }
+  .solo-impresion { display: block; color: #333; margin-bottom: 10pt; }
+  .lista-compra { display: block; columns: 2; column-gap: 12mm; }
+  .cat { background: none; padding: 0; margin: 0 0 10pt; break-inside: avoid-column; }
+  .cat h3 { font-size: 12pt; border-bottom: 1px solid #999; color: #000; }
+  .productos li { padding: 1.5pt 0; break-inside: avoid; }
+  .productos label { min-height: 0; }
+  input[type="checkbox"] { width: 10pt; height: 10pt; accent-color: #555; }
+  .prod-cant { color: #333; }
+  .productos li.tachado .prod-nombre, .productos li.tachado .prod-cant { color: #777; opacity: 1; }
+}

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Menú mediterráneo del mes</title>
+  <meta name="description" content="Menús mensuales de comidas y cenas mediterráneas sencillas, con información nutricional y lista de la compra.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="saltar" href="#calendario">Saltar al calendario</a>
+
+  <header class="cabecera">
+    <div class="contenedor">
+      <h1><span aria-hidden="true">🫒</span> Menú mediterráneo del mes</h1>
+      <p class="lema">Comidas y cenas sencillas (máximo 30 minutos), con calorías, nutrientes y lista de la compra.</p>
+    </div>
+  </header>
+
+  <main class="contenedor">
+    <section class="panel panel-opciones" aria-labelledby="titulo-opciones">
+      <h2 id="titulo-opciones" class="visualmente-oculto">Opciones del menú</h2>
+      <form id="form-opciones" class="opciones">
+        <div class="campo">
+          <label for="sel-mes">Mes</label>
+          <select id="sel-mes" name="mes"></select>
+        </div>
+        <div class="campo campo-anio">
+          <label for="inp-anio">Año</label>
+          <input id="inp-anio" name="anio" type="number" min="1900" max="2200" step="1" inputmode="numeric">
+        </div>
+        <div class="campo">
+          <label for="sel-comensales">Comensales</label>
+          <select id="sel-comensales" name="comensales"></select>
+        </div>
+        <fieldset class="campo dietas">
+          <legend>Dieta <span class="opcional">(opcional, combinable)</span></legend>
+          <label class="casilla"><input id="dieta-veg" type="checkbox"> <span aria-hidden="true">🌱</span> Vegetariano</label>
+          <label class="casilla"><input id="dieta-sg" type="checkbox"> <span aria-hidden="true">🌾</span> Sin gluten</label>
+        </fieldset>
+        <div class="acciones-form">
+          <button type="submit" class="btn btn-primario">Generar menú</button>
+          <button type="button" id="btn-reiniciar" class="btn btn-peligro">Reiniciar y borrar datos</button>
+        </div>
+      </form>
+      <p id="recetas-disponibles" class="ayuda"></p>
+    </section>
+
+    <div id="avisos" class="avisos" role="status" aria-live="polite"></div>
+
+    <section id="calendario" class="panel" aria-labelledby="titulo-calendario" tabindex="-1">
+      <div class="panel-cab">
+        <h2 id="titulo-calendario">Calendario</h2>
+        <p class="ayuda leyenda">☀️ Comida · 🌙 Cena · 🔒 Bloqueado · ⚠ No cumple la dieta. Pulsa un día para ver los platos (usa las flechas del teclado para moverte).</p>
+      </div>
+      <p id="cal-vacio" class="vacio">Todavía no hay menú para este mes. Elige tus opciones y pulsa <strong>Generar menú</strong>.</p>
+      <ol class="cal-semana" aria-hidden="true">
+        <li>Lun</li><li>Mar</li><li>Mié</li><li>Jue</li><li>Vie</li><li>Sáb</li><li>Dom</li>
+      </ol>
+      <ol id="cal-rejilla" class="cal-rejilla"></ol>
+    </section>
+
+    <section id="resumen-nutricional" class="panel" aria-labelledby="titulo-resumen" hidden></section>
+
+    <section id="compra" class="panel panel-compra" aria-labelledby="titulo-compra">
+      <div class="panel-cab">
+        <h2 id="titulo-compra">Lista de la compra</h2>
+        <div class="compra-controles">
+          <div class="campo">
+            <label for="sel-alcance">Periodo</label>
+            <select id="sel-alcance"></select>
+          </div>
+          <button type="button" id="btn-copiar" class="btn btn-secundario">📋 Copiar lista</button>
+          <button type="button" id="btn-imprimir" class="btn btn-secundario">🖨️ Imprimir</button>
+        </div>
+      </div>
+      <p id="titulo-impresion" class="solo-impresion"></p>
+      <p id="compra-info" class="ayuda"></p>
+      <p id="estado-compra" class="ayuda estado-compra" role="status" aria-live="polite"></p>
+      <div id="lista-compra" class="lista-compra"></div>
+    </section>
+  </main>
+
+  <footer class="pie contenedor">
+    <p>Información nutricional aproximada por ración, calculada a partir de los ingredientes. No sustituye el consejo de un profesional sanitario.</p>
+  </footer>
+
+  <dialog id="dialogo-dia" class="dialogo" aria-labelledby="dia-titulo">
+    <div class="dialogo-cab">
+      <h2 id="dia-titulo">Día</h2>
+      <button type="button" id="btn-cerrar-dia" class="btn-icono" aria-label="Cerrar">×</button>
+    </div>
+    <div id="dia-cuerpo" class="dia-cuerpo"></div>
+  </dialog>
+
+  <dialog id="dialogo-conflicto" class="dialogo dialogo-pequeno" aria-labelledby="conflicto-titulo" aria-describedby="conflicto-desc">
+    <h2 id="conflicto-titulo">Platos bloqueados incompatibles</h2>
+    <p id="conflicto-desc">Estos platos están bloqueados pero no cumplen la dieta que acabas de elegir:</p>
+    <ul id="conflicto-lista" class="conflicto-lista"></ul>
+    <div class="dialogo-acciones">
+      <button type="button" id="btn-desbloquear" class="btn btn-primario">Desbloquear y sustituir</button>
+      <button type="button" id="btn-mantener" class="btn btn-secundario">Mantenerlos</button>
+    </div>
+  </dialog>
+
+  <script src="recetas.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
